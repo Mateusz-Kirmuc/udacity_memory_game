@@ -37,7 +37,7 @@ body {
   flex-direction: column;
 }
 
-h1 {
+.header {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   text-align: center;
@@ -68,6 +68,7 @@ h1 {
   -ms-flex-align: center;
   align-items: center;
   margin: 2vh 0 4vh 0;
+  position: relative;
 }
 
 .deck .card {
@@ -143,4 +144,47 @@ h1 {
 
 .main-panel {
   height: 18vh;
+}
+
+
+/*
+ * Styles for the Success Popup
+ */
+
+.success-popup {
+  /*display: none;*/
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.success-msg {
+  width: 80%;
+  height: 80%;
+  position: absolute;
+  background-color: #DBF0F7;
+  margin: auto;
+  border-radius: 10px;
+  left: 10%;
+  top: 10%;
+  text-align: center;
+  padding-top: 30px;
+}
+
+.success-msg h1 {
+  font-family: 'Open Sans', sans-serif;
+}
+
+.play-again {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 20px;
+  background-color: #03F3AB;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
