@@ -34,6 +34,7 @@ function newGame() {
   insertNewCards(shuffledDeck);
   resetMoveCounter();
   openCards = [];
+  $(".card").click(cardClickHandler);
 }
 
 function removeOldCards() {
@@ -42,7 +43,7 @@ function removeOldCards() {
 
 function insertNewCards(shuffledDeck) {
   for (const card of shuffledDeck) {
-    const cardHTML = `<li class="card match"><i class="fa fa-${card}"></i></li>`;
+    const cardHTML = `<li class="card"><i class="fa fa-${card}"></i></li>`;
     $(".deck").append(cardHTML);
   }
 }
@@ -71,17 +72,27 @@ $(".restart").click(function() {
  */
 
 function cardClickHandler() {
-  flipCard();
-  markCardAsOpen();
-  if (openCards.length == 2) {
-    if (openCards[0].children().attr("class") == openCards[1].children().class("class")) {
-      markCardsAsMatch();
-    } else {
-      unflipCards();
-    }
-    incrementMoveCounter();
-    if ($(".match").length == 16) {
-      displaySuccessPopup();
-    }
-  }
+  flipCard($(this));
+  // markCardAsOpen();
+  // if (openCards.length == 2) {
+  //   if (openCards[0].children().attr("class") == openCards[1].children().class("class")) {
+  //     markCardsAsMatch();
+  //   } else {
+  //     unflipCards();
+  //   }
+  //   incrementMoveCounter();
+  //   if ($(".match").length == 16) {
+  //     displaySuccessPopup();
+  //   }
+  // }
 }
+
+function flipCard(card) {
+  card.toggleClass("open show");
+  card.off("click");
+}
+
+/*
+ * Start new game!
+ */
+newGame();
