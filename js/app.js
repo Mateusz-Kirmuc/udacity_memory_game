@@ -1,7 +1,10 @@
 /*
  * Create a list that holds all of your cards
  */
-
+const CARDS = ["diamond", "paper-plane-o", "anchor", "bolt", "cube", "leaf",
+  "bicycle", "bomb", "diamond", "paper-plane-o", "anchor", "bolt", "cube",
+  "leaf", "bicycle", "bomb"
+];
 
 /*
  * Display the cards on the page
@@ -9,22 +12,43 @@
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+function newGame() {
+  removeOldCards();
+  const shuffledDeck = shuffle(CARDS);
+  insertNewCards(shuffledDeck);
+  resetMoveCounter();
+}
+
+function removeOldCards() {
+  $(".card").remove();
+}
+
+function insertNewCards(shuffledDeck) {
+  for (const card of shuffledDeck) {
+    const cardHTML = `<li class="card"><i class="fa fa-${card}"></i></li>`;
+    $(".deck").append(cardHTML);
+  }
+}
+
+function resetMoveCounter() {
+  $(".moves").html("0");
+}
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+  var currentIndex = array.length,
+    temporaryValue, randomIndex;
 
-    while (currentIndex !== 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
 
-    return array;
+  return array;
 }
-
 
 /*
  * set up the event listener for a card. If a card is clicked:
@@ -36,3 +60,5 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+newGame();
