@@ -73,7 +73,7 @@ $(".restart").click(function() {
 
 function cardClickHandler() {
   flipCard($(this));
-  // markCardAsOpen();
+  markCardAsOpen($(this));
   // if (openCards.length == 2) {
   //   if (openCards[0].children().attr("class") == openCards[1].children().class("class")) {
   //     markCardsAsMatch();
@@ -90,6 +90,10 @@ function cardClickHandler() {
 function flipCard(card) {
   card.toggleClass("open show");
   card.off("click");
+}
+
+function markCardAsOpen(card) {
+  openCards.push(card);
 }
 
 /*
