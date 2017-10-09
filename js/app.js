@@ -6,6 +6,21 @@ const CARDS = ["diamond", "paper-plane-o", "anchor", "bolt", "cube", "leaf",
   "leaf", "bicycle", "bomb"
 ];
 
+// Shuffle function from http://stackoverflow.com/a/2450976
+function shuffle(array) {
+  var currentIndex = array.length,
+    temporaryValue, randomIndex;
+
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -25,7 +40,7 @@ function removeOldCards() {
 
 function insertNewCards(shuffledDeck) {
   for (const card of shuffledDeck) {
-    const cardHTML = `<li class="card"><i class="fa fa-${card}"></i></li>`;
+    const cardHTML = `<li class="card match"><i class="fa fa-${card}"></i></li>`;
     $(".deck").append(cardHTML);
   }
 }
@@ -34,21 +49,13 @@ function resetMoveCounter() {
   $(".moves").html("0");
 }
 
-// Shuffle function from http://stackoverflow.com/a/2450976
-function shuffle(array) {
-  var currentIndex = array.length,
-    temporaryValue, randomIndex;
+/*
+ * Set restart button click handler.
+ */
+$(".restart").click(function() {
+  newGame();
+});
 
-  while (currentIndex !== 0) {
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex -= 1;
-    temporaryValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = temporaryValue;
-  }
-
-  return array;
-}
 
 /*
  * set up the event listener for a card. If a card is clicked:
