@@ -72,19 +72,25 @@ $(".restart").click(function() {
  */
 
 function cardClickHandler() {
-  flipCard($(this));
-  markCardAsOpen($(this));
-  // if (openCards.length == 2) {
-  //   if (openCards[0].children().attr("class") == openCards[1].children().class("class")) {
-  //     markCardsAsMatch();
-  //   } else {
-  //     unflipCards();
-  //   }
-  //   incrementMoveCounter();
-  //   if ($(".match").length == 16) {
-  //     displaySuccessPopup();
-  //   }
-  // }
+  if (openCards.length < 2) {
+    markCardAsOpen($(this));
+    flipCard($(this));
+  }
+  if (openCards.length == 2) {
+    let card1Symbol = openCards[0].children().attr("class");
+    let card2Symbol = openCards[1].children().attr("class");
+    if (card1Symbol == card2Symbol) {
+      console.log("card matched!");
+      markCardsAsMatch();
+    } else {
+      console.log("card not matched!");
+      window.setTimeout(unflipCards, 700);
+    }
+    //   incrementMoveCounter();
+    //   if ($(".match").length == 16) {
+    //     displaySuccessPopup();
+    // }
+  }
 }
 
 function flipCard(card) {
@@ -93,9 +99,25 @@ function flipCard(card) {
 }
 
 function markCardAsOpen(card) {
-  openCards.push(card);
+  if (openCards.length < 2) {
+    openCards.push(card);
+  }
 }
 
+function markCardsAsMatch() {
+  for (let card of openCards) {
+    card.toggleClass("open show match");
+  }
+  openCards = [];
+}
+
+function unflipCards() {
+  for (let card of openCards) {
+    card.toggleClass("open show");
+    card.click(cardClickHandler);
+  }
+  openCards = [];
+}
 /*
  * Start new game!
  */
