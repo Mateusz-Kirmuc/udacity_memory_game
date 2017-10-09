@@ -5,6 +5,7 @@ const CARDS = ["diamond", "paper-plane-o", "anchor", "bolt", "cube", "leaf",
   "bicycle", "bomb", "diamond", "paper-plane-o", "anchor", "bolt", "cube",
   "leaf", "bicycle", "bomb"
 ];
+let openCards = [];
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -32,6 +33,7 @@ function newGame() {
   const shuffledDeck = shuffle(CARDS);
   insertNewCards(shuffledDeck);
   resetMoveCounter();
+  openCards = [];
 }
 
 function removeOldCards() {
@@ -68,4 +70,18 @@ $(".restart").click(function() {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-newGame();
+function cardClickHandler() {
+  flipCard();
+  markCardAsOpen();
+  if (openCards.length == 2) {
+    if (openCards[0].children().attr("class") == openCards[1].children().class("class")) {
+      markCardsAsMatch();
+    } else {
+      unflipCards();
+    }
+    incrementMoveCounter();
+    if ($(".match").length == 16) {
+      displaySuccessPopup();
+    }
+  }
+}
