@@ -84,7 +84,7 @@ function cardClickHandler() {
     if (card1Symbol == card2Symbol) {
       markCardsAsMatch();
     } else {
-      window.setTimeout(unflipCards, 700);
+      unflipCards();
     }
     incrementMoveCounter();
     if ($(".match").length == 16) {
@@ -112,14 +112,18 @@ function markCardsAsMatch() {
 }
 
 function unflipCards() {
-  for (let card of openCards) {
-    card.toggleClass("open show");
-    card.click(cardClickHandler);
-  }
+  const openCardsCopy = openCards.slice();
   openCards = [];
+  window.setTimeout(function() {
+    for (let card of openCardsCopy) {
+      card.toggleClass("open show");
+      card.click(cardClickHandler);
+    }
+  }, 700);
 }
 
 function incrementMoveCounter() {
+  console.log(openCards.length);
   const currentValue = parseInt($(".moves").html());
   const nextValue = currentValue + 1;
   $(".moves").html(nextValue.toString());
