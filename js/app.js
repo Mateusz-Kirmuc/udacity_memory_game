@@ -85,9 +85,9 @@ function cardClickHandler() {
       window.setTimeout(unflipCards, 700);
     }
     incrementMoveCounter();
-    //   if ($(".match").length == 16) {
-    //     displaySuccessPopup();
-    // }
+    if ($(".match").length == 16) {
+      displaySuccessPopup();
+    }
   }
 }
 
@@ -121,6 +121,10 @@ function incrementMoveCounter() {
   const currentValue = parseInt($(".moves").html());
   const nextValue = currentValue + 1;
   $(".moves").html(nextValue.toString());
+}
+
+function displaySuccessPopup() {
+  $(".success-popup").css("display", "block");
 }
 /*
  * Start new game!
