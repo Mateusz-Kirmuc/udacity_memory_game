@@ -80,13 +80,11 @@ function cardClickHandler() {
     let card1Symbol = openCards[0].children().attr("class");
     let card2Symbol = openCards[1].children().attr("class");
     if (card1Symbol == card2Symbol) {
-      console.log("card matched!");
       markCardsAsMatch();
     } else {
-      console.log("card not matched!");
       window.setTimeout(unflipCards, 700);
     }
-    //   incrementMoveCounter();
+    incrementMoveCounter();
     //   if ($(".match").length == 16) {
     //     displaySuccessPopup();
     // }
@@ -117,6 +115,12 @@ function unflipCards() {
     card.click(cardClickHandler);
   }
   openCards = [];
+}
+
+function incrementMoveCounter() {
+  const currentValue = parseInt($(".moves").html());
+  const nextValue = currentValue + 1;
+  $(".moves").html(nextValue.toString());
 }
 /*
  * Start new game!
