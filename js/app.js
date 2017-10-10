@@ -56,7 +56,9 @@ function resetMoveCounter() {
  * Set restart button click handler.
  */
 $(".restart").click(function() {
-  newGame();
+  if ($(".success-popup").css("display") == "none") {
+    newGame();
+  }
 });
 
 
@@ -126,6 +128,15 @@ function incrementMoveCounter() {
 function displaySuccessPopup() {
   $(".success-popup").css("display", "block");
 }
+
+/*
+ * Set play again button handler.
+ */
+$(".play-again").click(function() {
+  $(".success-popup").css("display", "none");
+  newGame();
+});
+
 /*
  * Start new game!
  */
