@@ -6,6 +6,7 @@ const CARDS = ["diamond", "paper-plane-o", "anchor", "bolt", "cube", "leaf",
   "leaf", "bicycle", "bomb"
 ];
 let openCards = [];
+let timer, time;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -33,6 +34,8 @@ function newGame() {
   const shuffledDeck = shuffle(CARDS);
   insertNewCards(shuffledDeck);
   resetMoveCounter();
+  resetStarRating();
+  restartTimer();
   openCards = [];
   $(".card").click(cardClickHandler);
 }
@@ -50,6 +53,20 @@ function insertNewCards(shuffledDeck) {
 
 function resetMoveCounter() {
   $(".moves").html("0");
+  $(".moves-summary").html("0");
+}
+
+function resetStarRating() {
+  $(".stars li").css("color", "black");
+  $(".stars-summary").html("3");
+}
+
+function restartTimer() {
+  time = 0;
+  timer = setInterval(function() {
+    time++;
+    console.log(time);
+  }, 1000);
 }
 
 /*
@@ -57,6 +74,7 @@ function resetMoveCounter() {
  */
 $(".restart").click(function() {
   if ($(".success-popup").css("display") == "none") {
+    clearInterval(timer);
     newGame();
   }
 });
@@ -87,6 +105,7 @@ function cardClickHandler() {
       unflipCards();
     }
     incrementMoveCounter();
+    updateStarRating();
     if ($(".match").length == 16) {
       displaySuccessPopup();
     }
@@ -123,13 +142,25 @@ function unflipCards() {
 }
 
 function incrementMoveCounter() {
-  console.log(openCards.length);
   const currentValue = parseInt($(".moves").html());
   const nextValue = currentValue + 1;
   $(".moves").html(nextValue.toString());
+  $(".moves-summary").html(nextValue.toString());
+}
+
+function updateStarRating() {
+  const currentMoves = parseInt($(".moves").html());
+  if (currentMoves == 14) {
+    $(".third-star").css("color", "LightGrey");
+    $(".stars-summary").html("2");
+  } else if (currentMoves == 22) {
+    $(".second-star").css("color", "LightGrey");
+    $(".stars-summary").html("1");
+  }
 }
 
 function displaySuccessPopup() {
+  $(".time").html(time);
   $(".success-popup").css("display", "block");
 }
 
@@ -138,6 +169,7 @@ function displaySuccessPopup() {
  */
 $(".play-again").click(function() {
   $(".success-popup").css("display", "none");
+  clearInterval(timer);
   newGame();
 });
 
