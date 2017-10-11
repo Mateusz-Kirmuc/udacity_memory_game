@@ -1,20 +1,9 @@
 # Memory Game Project
 
-## Table of Contents
+Simple, memory training browser game.  
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+## Game rules
 
-## Instructions
+Game consist of 8 pairs of cards arranged on the board down side up, so that user can't see symbols assigned to cards. When he clicks on single card, it flips showing symbol. Within single turn, user can flip two cards. If the cards symbol match, cards remains flipped, otherwise they turn back. The goal is to match all cards on board.
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
-
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
-
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+Above the board, user can see star rating, counter of moves and restart button. User can restart game at any time. Whenever new turn is started, counter of moves increments. If user finished game within 14 moves, his rating is 3 stars. If he finished the game within 22 moves, his rating is 2 stars. Otherwise he gets only 1 star.        
