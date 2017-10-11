@@ -5,6 +5,7 @@ const CARDS = ["diamond", "paper-plane-o", "anchor", "bolt", "cube", "leaf",
   "bicycle", "bomb", "diamond", "paper-plane-o", "anchor", "bolt", "cube",
   "leaf", "bicycle", "bomb"
 ];
+// Global variables.
 let openCards = [];
 let timer, time;
 
@@ -24,10 +25,7 @@ function shuffle(array) {
   return array;
 }
 /*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
+ * Function for start/restart new game.
  */
 function newGame() {
   removeOldCards();
@@ -40,10 +38,16 @@ function newGame() {
   $(".card").click(cardClickHandler);
 }
 
+/*
+ * Function removes all cards from board.
+ */
 function removeOldCards() {
   $(".card").remove();
 }
 
+/*
+ * Function puts new cards on board.
+ */
 function insertNewCards(shuffledDeck) {
   for (const card of shuffledDeck) {
     const cardHTML = `<li class="card"><i class="fa fa-${card}"></i></li>`;
@@ -51,16 +55,25 @@ function insertNewCards(shuffledDeck) {
   }
 }
 
+/*
+ * Function resets counter of moves.
+ */
 function resetMoveCounter() {
   $(".moves").html("0");
   $(".moves-summary").html("0");
 }
 
+/*
+ * Function resets star rating.
+ */
 function resetStarRating() {
   $(".stars li").css("color", "black");
   $(".stars-summary").html("3");
 }
 
+/*
+ * Function restarts timer.
+ */
 function restartTimer() {
   time = 0;
   timer = setInterval(function() {
@@ -112,17 +125,26 @@ function cardClickHandler() {
   }
 }
 
+/*
+ * Function flips single card.
+ */
 function flipCard(card) {
   card.toggleClass("open show");
   card.off("click");
 }
 
+/*
+ * Function marks card as open (adds card to openCards array).
+ */
 function markCardAsOpen(card) {
   if (openCards.length < 2) {
     openCards.push(card);
   }
 }
 
+/*
+ * Function marks cards as match.
+ */
 function markCardsAsMatch() {
   for (let card of openCards) {
     card.toggleClass("open show match");
@@ -130,6 +152,9 @@ function markCardsAsMatch() {
   openCards = [];
 }
 
+/*
+ * Function turn back single card.
+ */
 function unflipCards() {
   const openCardsCopy = openCards.slice();
   openCards = [];
@@ -141,6 +166,9 @@ function unflipCards() {
   }, 700);
 }
 
+/*
+ * Function increment counter of moves.
+ */
 function incrementMoveCounter() {
   const currentValue = parseInt($(".moves").html());
   const nextValue = currentValue + 1;
@@ -148,6 +176,9 @@ function incrementMoveCounter() {
   $(".moves-summary").html(nextValue.toString());
 }
 
+/*
+ * Function updates star rating.
+ */
 function updateStarRating() {
   const currentMoves = parseInt($(".moves").html());
   if (currentMoves == 14) {
@@ -159,6 +190,9 @@ function updateStarRating() {
   }
 }
 
+/*
+ * Function toggles success-popup.
+ */
 function displaySuccessPopup() {
   $(".time").html(time);
   $(".success-popup").css("display", "block");
