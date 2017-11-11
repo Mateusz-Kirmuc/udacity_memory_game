@@ -76,9 +76,10 @@ function resetStarRating() {
  */
 function restartTimer() {
   time = 0;
+  $(".seconds").html(time);
   timer = setInterval(function() {
     time++;
-    console.log(time);
+    $(".seconds").html(time);
   }, 1000);
 }
 
@@ -194,6 +195,7 @@ function updateStarRating() {
  * Function toggles success-popup.
  */
 function displaySuccessPopup() {
+  clearInterval(timer);
   $(".time").html(time);
   $(".success-popup").css("display", "block");
 }
