@@ -137,6 +137,16 @@ body {
   cursor: pointer;
 }
 
+.timer {
+  margin-left: 10px;
+}
+
+.seconds {
+  display: inline-block;
+  width: 25px;
+  text-align: center;
+}
+
 
 /*
  * Styles for the Main Panel
